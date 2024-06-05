@@ -52,7 +52,8 @@ public class NOC implements CKASTVisitor, ClassLevelMetric{
 	
 	@Override
 	public void setResult(CKClassResult result) {
-		
+		// This method is intentionally left empty.
+		throw new UnsupportedOperationException("setResult() method is not supported.");
 	}
 
 }
