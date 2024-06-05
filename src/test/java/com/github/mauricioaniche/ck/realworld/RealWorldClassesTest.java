@@ -38,6 +38,9 @@ public class RealWorldClassesTest extends BaseTest {
 				System.out.println("- variable: " + entry.getKey());
 			}
 		}
+
+		// Add an assertion here
+		Assertions.assertNotNull(ck);
 	}
 
 	// This class contains a method with a huge javadoc, and then the LOC was getting too big for
