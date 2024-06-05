@@ -142,28 +142,23 @@ public class LOCCalculator {
 	private static boolean isSourceCodeLine(String line) {
 		boolean isSourceCodeLine = false;
 		line = line.trim();
-		if ("".equals(line) || line.startsWith("//")) {
+		if (isBlankOrComment(line)) {
 			return isSourceCodeLine;
 		}
 		if (line.length() == 1) {
 			return true;
 		}
-		int index = line.indexOf("/*");
-		if (index != 0) {
+		if (line.indexOf("/*") != 0) {
 			return true;
 		} else {
 			while (line.length() > 0) {
-				line = line.substring(index + 2);
+				line = line.substring(line.indexOf("/*") + 2);
 				int endCommentPosition = line.indexOf("*/");
-				if (endCommentPosition < 0) {
-					return false;
-				}
-				if (endCommentPosition == line.length() - 2) {
+				if (endCommentPosition < 0 || endCommentPosition == line.length() - 2) {
 					return false;
 				} else {
-					String subString = line.substring(endCommentPosition + 2)
-							.trim();
-					if ("".equals(subString) || subString.indexOf("//") == 0) {
+					String subString = line.substring(endCommentPosition + 2).trim();
+					if (isBlankOrComment(subString)) {
 						return false;
 					} else {
 						if (subString.startsWith("/*")) {
@@ -173,10 +168,13 @@ public class LOCCalculator {
 						return true;
 					}
 				}
-
 			}
 		}
 		return isSourceCodeLine;
+	}
+
+	private static boolean isBlankOrComment(String line) {
+		return "".equals(line) || line.startsWith("//");
 	}
 
 }
