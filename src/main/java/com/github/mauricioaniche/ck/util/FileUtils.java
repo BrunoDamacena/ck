@@ -45,13 +45,13 @@ public class FileUtils {
 
 	//Get all files from of the given file ending from the directory at the given path.
 	private static String[] getAllFiles(String path, String ending){
-		try {
-			return Files.walk(Paths.get(path))
-					.filter(Files::isRegularFile)
-					.filter(x -> !isIgnoredDir(x.toAbsolutePath().toString(), IGNORED_DIRECTORIES))
-					.filter(x -> x.toAbsolutePath().toString().toLowerCase().endsWith(ending))
-					.map(x -> x.toAbsolutePath().toString())
-					.toArray(String[]::new);
+		try (Stream<Path> stream = Files.walk(Paths.get(path))) {
+			return stream
+				.filter(Files::isRegularFile)
+				.filter(x -> !isIgnoredDir(x.toAbsolutePath().toString(), IGNORED_DIRECTORIES))
+				.filter(x -> x.toAbsolutePath().toString().toLowerCase().endsWith(ending))
+				.map(x -> x.toAbsolutePath().toString())
+				.toArray(String[]::new);
 		} catch(Exception e) {
 			throw new RuntimeException(e);
 		}
