@@ -13,10 +13,10 @@ public class MetricsFinder {
 
 	private static List<Class<? extends MethodLevelMetric>> methodLevelClasses = null;
 	private static List<Class<? extends ClassLevelMetric>> classLevelClasses = null;
-	private DependencySorter sorter;
+	private static DependencySorter sorter;
 
 	public MetricsFinder(DependencySorter sorter) {
-		this.sorter = sorter;
+		MetricsFinder.sorter = sorter;
 	}
 
 	public MetricsFinder() {
@@ -56,7 +56,7 @@ public class MetricsFinder {
 		}
 	}
 
-	private void loadMethodLevelClasses(boolean variablesAndFields) {
+	private static void loadMethodLevelClasses(boolean variablesAndFields) {
 		try {
 			Reflections reflections = new Reflections("com.github.mauricioaniche.ck.metric");
 
