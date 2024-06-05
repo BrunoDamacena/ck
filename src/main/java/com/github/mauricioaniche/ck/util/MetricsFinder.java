@@ -69,7 +69,7 @@ public class MetricsFinder {
 		}
 	}
 
-	private void loadClassLevelClasses() {
+	private static void loadClassLevelClasses() {
 		try {
 			Reflections reflections = new Reflections("com.github.mauricioaniche.ck.metric");
 			classLevelClasses = sorter.sort(new ArrayList<>(reflections.getSubTypesOf(ClassLevelMetric.class)));
