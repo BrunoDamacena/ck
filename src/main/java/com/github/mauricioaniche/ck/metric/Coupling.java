@@ -315,12 +315,12 @@ public class Coupling implements CKASTVisitor, ClassLevelMetric, MethodLevelMetr
 
 	@Override
 	public void setResult(CKClassResult result) {
-		
+		// This method is intentionally left empty
 	}
 
 	@Override
 	public void setResult(CKMethodResult result) {
-		
+		// This method is intentionally left empty
 	}
 	
 	@Override
