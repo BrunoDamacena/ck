@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class FileUtils {
   public static final List<String> IGNORED_DIRECTORIES = new ArrayList<>();
@@ -20,8 +21,8 @@ public class FileUtils {
 
 	//Get all directories from the directory at the given path.
 	public static String[] getAllDirs(String path) {
-		try {
-			return Files.walk(Paths.get(path))
+		try (Stream<Path> stream = Files.walk(Paths.get(path))) {
+			return stream
 					.filter(Files::isDirectory)
           .filter(FileUtils::isHiddenDir)
 					.filter(x -> !isIgnoredDir(x.toAbsolutePath().toString(), IGNORED_DIRECTORIES))
